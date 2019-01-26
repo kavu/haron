@@ -22,7 +22,7 @@ fn read_file(name: &str) -> Result<String, Box<Error>> {
 fn parse_data(data: &str) -> Vec<Instruction> {
     let input = parser::Input::from(data);
 
-    match parser::parse(input) {
+    match parser::parse_string(input) {
         Ok((_, tree)) => tree,
         Err(err) => panic!("{}", err),
     }

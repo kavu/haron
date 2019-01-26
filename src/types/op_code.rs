@@ -1,5 +1,7 @@
 use std::fmt;
-use std::str::FromStr;
+
+use nom::types::CompleteStr as Input;
+use nom::*;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum OpCode {
@@ -7,35 +9,6 @@ pub enum OpCode {
     NOP,
     SPL,
     DAT,
-}
-
-#[derive(Debug, PartialEq)]
-pub struct ParseOpCodeError;
-
-impl std::error::Error for ParseOpCodeError {
-    fn description(&self) -> &str {
-        "Can't parse str as OpCode"
-    }
-}
-
-impl fmt::Display for ParseOpCodeError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "ParseOpCodeError()")
-    }
-}
-
-impl FromStr for OpCode {
-    type Err = ParseOpCodeError;
-
-    fn from_str(s: &str) -> Result<OpCode, Self::Err> {
-        match s.to_uppercase().as_str() {
-            "MOV" => Ok(OpCode::MOV),
-            "NOP" => Ok(OpCode::NOP),
-            "SPL" => Ok(OpCode::SPL),
-            "DAT" => Ok(OpCode::DAT),
-            _ => Err(ParseOpCodeError),
-        }
-    }
 }
 
 impl fmt::Display for OpCode {
@@ -51,23 +24,19 @@ impl fmt::Display for OpCode {
     }
 }
 
+named!(pub opcode(Input) -> OpCode,
+    ws!(alt!(
+        map!(tag_no_case!("MOV"), |_| OpCode::MOV) |
+        map!(tag_no_case!("NOP"), |_| OpCode::NOP) |
+        map!(tag_no_case!("SPL"), |_| OpCode::SPL) |
+        map!(tag_no_case!("DAT"), |_| OpCode::DAT))));
+
 #[cfg(test)]
 mod test {
-    use super::*;
+    use super::OpCode;
 
     #[test]
-    fn test_from_str() {
-        assert_eq!(OpCode::MOV, "MOV".parse().unwrap());
-        assert_eq!(OpCode::NOP, "NOP".parse().unwrap());
-        assert_eq!(OpCode::SPL, "SPL".parse().unwrap());
-        assert_eq!(OpCode::DAT, "DAT".parse().unwrap());
-    }
-
-    #[test]
-    fn test_wrong_from_str() {
-        match "SOMETHING".parse::<OpCode>() {
-            Ok(_) => assert!(false, "must be a ParseOpCodeError error"),
-            Err(ParseOpCodeError) => assert!(true),
-        };
+    fn test_display() {
+        assert_eq!("DAT", format!("{}", OpCode::DAT));
     }
 }
