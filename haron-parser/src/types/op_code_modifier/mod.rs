@@ -17,6 +17,8 @@ pub enum OpCodeModifier {
     I,
 }
 
+impl Copy for OpCodeModifier {}
+
 impl fmt::Display for OpCodeModifier {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let symbol = match self {

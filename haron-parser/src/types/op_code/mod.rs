@@ -28,8 +28,8 @@ impl fmt::Display for OpCode {
 }
 
 named!(pub opcode(Input) -> OpCode,
-    ws!(alt!(
+    alt!(
         map!(tag_no_case!("MOV"), |_| OpCode::MOV) |
         map!(tag_no_case!("NOP"), |_| OpCode::NOP) |
         map!(tag_no_case!("SPL"), |_| OpCode::SPL) |
-        map!(tag_no_case!("DAT"), |_| OpCode::DAT))));
+        map!(tag_no_case!("DAT"), |_| OpCode::DAT)));
