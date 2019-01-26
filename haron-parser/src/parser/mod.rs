@@ -6,5 +6,8 @@ use crate::types::instruction::{instruction, Instruction};
 #[cfg(test)]
 mod tests;
 
+#[cfg(test)]
+mod bench;
+
 named!(pub parse_string(Input) -> Vec<Instruction>,
     many0!(instruction));
