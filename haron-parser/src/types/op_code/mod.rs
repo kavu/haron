@@ -3,6 +3,9 @@ use std::fmt;
 use nom::types::CompleteStr as Input;
 use nom::*;
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum OpCode {
     MOV,
@@ -30,13 +33,3 @@ named!(pub opcode(Input) -> OpCode,
         map!(tag_no_case!("NOP"), |_| OpCode::NOP) |
         map!(tag_no_case!("SPL"), |_| OpCode::SPL) |
         map!(tag_no_case!("DAT"), |_| OpCode::DAT))));
-
-#[cfg(test)]
-mod test {
-    use super::OpCode;
-
-    #[test]
-    fn test_display() {
-        assert_eq!("DAT", format!("{}", OpCode::DAT));
-    }
-}

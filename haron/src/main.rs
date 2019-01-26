@@ -1,15 +1,13 @@
 extern crate clap;
+extern crate haron_parser;
 extern crate nom;
 
 use clap::{crate_authors, crate_version};
+use haron_parser::types::instruction::*;
 
 use std::fs::File;
 use std::io::prelude::*;
 use std::io::Error;
-
-mod types;
-use crate::types::instruction::*;
-mod parser;
 
 fn read_file(name: &str) -> Result<String, Box<Error>> {
     let mut file = File::open(name)?;
@@ -20,9 +18,9 @@ fn read_file(name: &str) -> Result<String, Box<Error>> {
 }
 
 fn parse_data(data: &str) -> Vec<Instruction> {
-    let input = parser::Input::from(data);
+    let input = haron_parser::types::Input::from(data);
 
-    match parser::parse_string(input) {
+    match haron_parser::parser::parse_string(input) {
         Ok((_, tree)) => tree,
         Err(err) => panic!("{}", err),
     }

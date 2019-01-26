@@ -1,0 +1,13 @@
+[package]
+name = "haron"
+version = "0.1.0"
+authors = ["Maxim Riveiro <kavu13@gmail.com>"]
+edition = "2018"
+license = "Apache-2.0"
+publish = false
+
+[dependencies]
+clap = "*"
+nom = "*"
+
+haron-parser = { path = "../haron-parser" }

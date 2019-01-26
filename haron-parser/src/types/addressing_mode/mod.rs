@@ -3,6 +3,9 @@ use std::fmt;
 use nom::types::CompleteStr as Input;
 use nom::{alt, call, char, error_position, map, named, opt};
 
+#[cfg(test)]
+mod tests;
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum AddressingMode {
     NONE,
@@ -47,25 +50,3 @@ named!(possible_addressing_modes(Input) -> char,
 
 named!(pub addressing_mode(Input) -> Option<AddressingMode>,
     opt!(map!(possible_addressing_modes, AddressingMode::from)));
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_possible_addressing_modes() {
-        match possible_addressing_modes("#".into()) {
-            Ok((_, result)) => assert_eq!('#', result),
-            Err(err) => assert!(false, format!("{}", err)),
-        }
-    }
-
-    #[test]
-    fn test_addressing_mode() {
-        match addressing_mode("#".into()) {
-            Ok((_, Some(result))) => assert_eq!(AddressingMode::IMMEDIATE, result),
-            Ok((_, None)) => assert!(false, "no matches"),
-            Err(err) => assert!(false, format!("{}", err)),
-        }
-    }
-}
