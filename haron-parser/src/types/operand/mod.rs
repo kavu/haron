@@ -18,7 +18,7 @@ impl Copy for Operand {}
 
 impl fmt::Display for Operand {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}{}", self.mode.clone().unwrap_or_default(), self.value)
+        write!(f, "{}{}", self.mode.unwrap_or_default(), self.value)
     }
 }
 
@@ -26,20 +26,22 @@ type OperandsTuple = (Option<Operand>, Option<Operand>);
 
 fn to_operand(input: (Option<AddressingMode>, Input)) -> Option<Operand> {
     let mode = input.0;
-    let value = i64::from_str_radix(&input.1, 10).unwrap();
 
-    Some(Operand { mode, value })
+    match i64::from_str_radix(&input.1, 10) {
+        Ok(value) => Some(Operand { mode, value }),
+        Err(err) => panic!(err),
+    }
 }
 
 fn unwrap_operands(opt: Option<Vec<Option<Operand>>>) -> OperandsTuple {
     let vec = opt.unwrap_or_default();
     let operand_a: Option<Operand> = match vec.get(0) {
-        Some(value) => value.clone(),
+        Some(value) => *value,
         None => None,
     };
 
     let operand_b: Option<Operand> = match vec.get(1) {
-        Some(value) => value.clone(),
+        Some(value) => *value,
         None => None,
     };
 

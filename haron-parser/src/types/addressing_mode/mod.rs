@@ -1,7 +1,7 @@
 use std::fmt;
 
 use nom::types::CompleteStr as Input;
-use nom::{alt, call, char, error_position, map, named, opt};
+use nom::*;
 
 #[cfg(test)]
 mod tests;

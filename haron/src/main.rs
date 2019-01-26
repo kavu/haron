@@ -27,6 +27,7 @@ fn parse_data(data: &str) -> Vec<Instruction> {
 }
 
 fn parse_command(matches: &clap::ArgMatches) {
+    // Safe unwrap, because argument is required
     let file_path = matches.value_of("file").unwrap();
 
     match read_file(file_path) {

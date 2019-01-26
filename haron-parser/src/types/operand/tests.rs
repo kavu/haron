@@ -16,7 +16,7 @@ fn parse_two_operands() {
 
     match operands("0, -1".into()) {
         Ok((_, result)) => assert_eq!(expected, result),
-        Err(err) => assert!(false, err),
+        Err(err) => panic!(format!("{}", err)),
     }
 }
 
@@ -31,7 +31,7 @@ fn parse_one_operand() {
 
     match operands("1".into()) {
         Ok((_, result)) => assert_eq!(expected, result),
-        Err(err) => assert!(false, err),
+        Err(err) => panic!(format!("{}", err)),
     }
 }
 

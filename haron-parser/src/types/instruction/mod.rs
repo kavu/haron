@@ -24,12 +24,12 @@ impl fmt::Display for Instruction {
             f.write_str(" ")?;
         }
 
-        if self.operand_a.is_some() {
-            f.write_fmt(format_args!("{}", self.operand_a.clone().unwrap()))?;
+        if let Some(operand_a) = self.operand_a {
+            f.write_fmt(format_args!("{}", operand_a))?;
         }
 
-        if self.operand_b.is_some() {
-            f.write_fmt(format_args!(",{}", self.operand_b.clone().unwrap()))?;
+        if let Some(operand_b) = self.operand_b {
+            f.write_fmt(format_args!(",{}", operand_b))?;
         }
 
         Ok(())
