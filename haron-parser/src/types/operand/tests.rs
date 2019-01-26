@@ -1,4 +1,4 @@
-use super::{Operand, operands};
+use super::{operands, Operand};
 
 #[test]
 fn parse_two_operands() {

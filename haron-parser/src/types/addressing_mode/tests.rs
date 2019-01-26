@@ -1,4 +1,4 @@
-use super::{possible_addressing_modes, addressing_mode};
+use super::{addressing_mode, possible_addressing_modes};
 use crate::types::addressing_mode::AddressingMode;
 
 #[test]
