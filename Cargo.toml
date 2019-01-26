@@ -3,3 +3,9 @@ members = [
     "haron",
     "haron-parser"
 ]
+
+[profile.release]
+lto = true
+
+[profile.bench]
+lto = true
