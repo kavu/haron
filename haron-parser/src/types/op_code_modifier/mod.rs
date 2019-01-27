@@ -6,7 +6,7 @@ use nom::*;
 #[cfg(test)]
 mod tests;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum OpCodeModifier {
     A,
     B,
@@ -16,8 +16,6 @@ pub enum OpCodeModifier {
     X,
     I,
 }
-
-impl Copy for OpCodeModifier {}
 
 impl fmt::Display for OpCodeModifier {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

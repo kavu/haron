@@ -6,14 +6,12 @@ use nom::*;
 #[cfg(test)]
 mod tests;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum AddressingMode {
     NONE,
     IMMEDIATE,
     DIRECT,
 }
-
-impl Copy for AddressingMode {}
 
 impl Default for AddressingMode {
     fn default() -> Self {

@@ -8,13 +8,11 @@ use crate::types::addressing_mode::{addressing_mode, AddressingMode};
 #[cfg(test)]
 mod tests;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Operand {
     pub mode: Option<AddressingMode>,
     pub value: i64,
 }
-
-impl Copy for Operand {}
 
 impl fmt::Display for Operand {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

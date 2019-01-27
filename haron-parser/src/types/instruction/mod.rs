@@ -10,7 +10,7 @@ use crate::types::operand::{operands, Operand};
 #[cfg(test)]
 mod tests;
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Instruction {
     pub opcode: OpCode,
     pub modifier: Option<OpCodeModifier>,
