@@ -1,7 +1,3 @@
-extern crate clap;
-extern crate haron_parser;
-extern crate nom;
-
 use clap::{crate_authors, crate_version};
 use haron_parser::types::instruction::*;
 
