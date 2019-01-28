@@ -8,6 +8,5 @@ publish = false
 
 [dependencies]
 clap = "*"
-nom = "*"
 
 haron-parser = { path = "../haron-parser" }

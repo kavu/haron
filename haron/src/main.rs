@@ -2,8 +2,7 @@ use clap::{crate_authors, crate_version};
 use haron_parser::types::instruction::*;
 
 use std::fs::File;
-use std::io::prelude::*;
-use std::io::Error;
+use std::io::{prelude::Read, Error};
 
 fn read_file(name: &str) -> Result<String, Box<Error>> {
     let mut file = File::open(name)?;
