@@ -5,6 +5,17 @@ authors = ["Maxim Riveiro <kavu13@gmail.com>"]
 edition = "2018"
 license = "Apache-2.0"
 publish = false
+autobenches = false
 
 [dependencies]
 nom = "*"
+
+[dev-dependencies]
+criterion = "*"
+
+[[bench]]
+name = "benches_main"
+harness = false
+
+[lib]
+bench = false
