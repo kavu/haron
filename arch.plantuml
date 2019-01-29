@@ -1,0 +1,49 @@
+@startuml haron
+
+set namespaceSeparator /
+
+' class haronParser/misc/Core<? is Clone> {
+'   +with_capacity: Core
+' }
+
+package haronParser/types {
+  enum AddressingMode
+
+  together {
+    enum OpCode
+
+    enum OpCodeModifier
+  }
+
+  class Operand {
+    +mode: Option<AddressingMode>
+    +value: i64
+  }
+
+
+  class Instruction {
+    +opcode: OpCode
+    +modifier: Option<OpCodeModifier>
+    +operand_a: Option<Operand>
+    +operand_b: Option<Operand>
+  }
+
+
+  AddressingMode -> Operand::mode
+
+  Operand -> Instruction::operand_a
+  Operand -> Instruction::operand_b
+
+  OpCodeModifier -down-> Instruction::modifier
+  OpCode -down-> Instruction::opcode
+}
+
+package haronParser/parser {
+  class parse_string << (F,orchid) >> {
+    Vec[Instruction]
+  }
+}
+
+Instruction -down-> parse_string
+
+@enduml

@@ -2,3 +2,4 @@
 **/*.rs.bk
 .vscode/
 *.red
+.DS_Store
