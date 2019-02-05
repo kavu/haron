@@ -32,7 +32,17 @@ fn test_parse_string() {
         },
     ];
 
-    let input = "\r\n\r\n    DAT.A 1, 1  \n\nMOV.BA   1\n\n\nSPL ,1\n".into();
+    let input = "
+        \r\n;  test comment  \r\n
+        DAT.A 1, 1  ; comment
+        \n\n
+        ; comment\n
+        \n
+        MOV.BA   1
+        \n\n\nSPL ,1\n
+        INVALID
+    ".into();
+
     let (_, result) = parse_string(input).unwrap();
 
     assert_eq!(expected, result);

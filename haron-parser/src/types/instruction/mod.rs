@@ -42,7 +42,14 @@ impl fmt::Display for Instruction {
     }
 }
 
-named!(pub instruction(Input) -> Instruction,
+named!(pub comment(Input) -> Input,
+    ws!(do_parse!(
+        tag!(";") >>
+        comment: map!(not_line_ending, |s| s.trim().into() ) >>
+        opt!(line_ending) >>
+        (comment))));
+
+named!(pub instruction(Input) -> Option<Instruction>,
     do_parse!(
         opt!(multispace) >>
         opcode: opcode >>
@@ -50,10 +57,11 @@ named!(pub instruction(Input) -> Instruction,
         multispace >>
         operands_tuple: operands >>
         opt!(multispace) >>
-        (Instruction {
+        opt!(comment) >>
+        (Some(Instruction {
             opcode,
             modifier,
             operand_a: operands_tuple.0,
             operand_b: operands_tuple.1,
-        })
+        }))
     ));
