@@ -7,8 +7,9 @@ license = "Apache-2.0"
 publish = false
 autobenches = false
 
-[dependencies]
-nom = "*"
+[dependencies.nom]
+version = "*"
+features = ["verbose-errors"]
 
 [dev-dependencies]
 criterion = "*"
